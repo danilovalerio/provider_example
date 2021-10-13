@@ -48,6 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         child: WidgetCentral(),
       ),
+      //TODO adicionar o botão para decrescer um ao tocar
       floatingActionButton: FloatingActionButton(
         onPressed: (){
           context.read<Counter>().increment();
