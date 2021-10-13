@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:provider_example/counter.dart';
 import 'package:provider_example/widget_central.dart';
@@ -38,7 +39,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,12 +49,25 @@ class _MyHomePageState extends State<MyHomePage> {
         child: WidgetCentral(),
       ),
       //TODO adicionar o botão para decrescer um ao tocar
-      floatingActionButton: FloatingActionButton(
-        onPressed: (){
-          context.read<Counter>().increment();
-        },
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            onPressed: () {
+              context.read<Counter>().increment();
+            },
+            tooltip: 'Increment',
+            child: const Icon(LineIcons.plusCircle),
+          ),
+          SizedBox(width: 12,),
+          FloatingActionButton(
+            onPressed: () {
+              context.read<Counter>().decrement();
+            },
+            tooltip: 'Increment',
+            child: const Icon(LineIcons.minusCircle),
+          )
+        ],
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
