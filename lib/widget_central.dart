@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider_example/widget_contador.dart';
 
 class WidgetCentral extends StatelessWidget {
-  const WidgetCentral({Key? key}) : super(key: key);
+
+  final int counter;
+
+  const WidgetCentral( {Key? key, required this.counter,}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +15,7 @@ class WidgetCentral extends StatelessWidget {
         const Text(
           'You have pushed the button this many times:',
         ),
-        WidgetContador(),
+        WidgetContador(counter: counter,),
       ],
     );
   }
