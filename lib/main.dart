@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:provider_example/counter.dart';
 import 'package:provider_example/widget_central.dart';
 
 void main() {
@@ -11,12 +13,17 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Provider Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    ///Usar o tipo notifier para notificar os observadores da alteracao do estado
+    return ChangeNotifierProvider(
+      ///Disponibiliza o counter para toda a aplicacao
+      create: (_) => Counter(),
+      child: MaterialApp(
+        title: 'Flutter Provider Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: const MyHomePage(title: 'Flutter Provider Demo'),
       ),
-      home: const MyHomePage(title: 'Flutter Provider Demo'),
     );
   }
 }
@@ -31,13 +38,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,10 +46,12 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: WidgetCentral(counter: _counter),
+        child: WidgetCentral(),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: (){
+          context.read<Counter>().increment();
+        },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
